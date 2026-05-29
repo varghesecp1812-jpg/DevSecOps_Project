@@ -14,7 +14,7 @@ export default function Login() {
     try {
 
       const res = await axios.post(
-        'http://localhost:3000/api/auth/login',
+        'http://YOUR_EC2_PUBLIC_IP/api/auth/login',
         form
       );
 

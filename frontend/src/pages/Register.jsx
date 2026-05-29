@@ -16,7 +16,7 @@ export default function Register() {
     try {
 
       await axios.post(
-        'http://localhost:3000/api/auth/register',
+        'http://YOUR_EC2_PUBLIC_IP/api/auth/register',
         form
       );
 

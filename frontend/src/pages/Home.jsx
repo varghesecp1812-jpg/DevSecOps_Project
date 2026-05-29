@@ -38,27 +38,14 @@ export default function Home() {
     <div className="min-h-screen bg-gray-100">
 
       <nav className="bg-orange-500 text-white p-4 flex justify-between">
-        <h1 className="text-3xl font-bold">FoodApp</h1>
+        <h1 className="text-2xl font-bold">FoodApp</h1>
 
-        <div className="flex gap-5">
+        <div className="flex gap-4">
           <Link to="/login">Login</Link>
           <Link to="/register">Register</Link>
           <Link to="/cart">Cart</Link>
-          <Link to="/orders">Orders</Link>
         </div>
       </nav>
-
-      <div className="bg-orange-500 text-white py-20 text-center">
-
-        <h1 className="text-6xl font-bold mb-4">
-          Delicious Food Delivered Fast
-        </h1>
-
-        <p className="text-xl">
-          Order from your favorite restaurants
-        </p>
-
-      </div>
 
       <div className="p-8">
 
@@ -66,51 +53,40 @@ export default function Home() {
           Popular Restaurants
         </h2>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-6">
 
           {restaurants.map((restaurant) => (
-
             <Link
               key={restaurant.id}
               to={`/restaurant/${restaurant.slug}`}
             >
-
-              <div className="bg-white rounded-3xl shadow-xl overflow-hidden hover:scale-105 transition duration-300">
+              <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:scale-105 transition duration-300">
 
                 <img
                   src={restaurant.image}
                   alt={restaurant.name}
-                  className="h-60 w-full object-cover"
+                  className="h-52 w-full object-cover"
                 />
 
-                <div className="p-5">
+                <div className="p-4">
 
                   <h3 className="text-2xl font-bold">
                     {restaurant.name}
                   </h3>
 
-                  <p className="text-gray-500 mt-2">
+                  <p className="text-gray-500">
                     {restaurant.cuisine}
                   </p>
 
-                  <div className="flex justify-between mt-5">
-
-                    <span className="font-bold">
-                      ⭐ {restaurant.rating}
-                    </span>
-
-                    <span>
-                      {restaurant.delivery}
-                    </span>
-
+                  <div className="flex justify-between mt-4">
+                    <span>⭐ {restaurant.rating}</span>
+                    <span>{restaurant.delivery}</span>
                   </div>
 
                 </div>
 
               </div>
-
             </Link>
-
           ))}
 
         </div>
