@@ -1,63 +1,57 @@
 const express = require("express");
-const bodyParser = require("body-parser");
+const path = require("path");
 const sequelize = require("./config/database");
-const User = require("./models/User");
+
+const Food = require("./models/Food");
+const Order = require("./models/Order");
 
 const app = express();
 
 app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 
-sequelize.sync();
+// DB CONNECT
+sequelize.sync({ alter: true })
+  .then(() => console.log("Database synced"))
+  .catch(err => console.log(err));
 
+/* HOME PAGE */
 app.get("/", async (req, res) => {
-    const users = await User.findAll();
-    res.render("index", { users });
+  const foods = await Food.findAll();
+  res.render("index", { foods });
 });
 
-app.post("/add", async (req, res) => {
-    const { name, email } = req.body;
+/* ADD FOOD */
+app.post("/add-food", async (req, res) => {
+  await Food.create({
+    name: req.body.name,
+    price: req.body.price
+  });
 
-    await User.create({
-        name,
-        email
+  res.redirect("/");
+});
+
+/* ORDER FOOD (THIS FIXES YOUR ISSUE) */
+app.post("/order/:id", async (req, res) => {
+  try {
+    await Order.create({
+      foodId: req.params.id,
+      quantity: 1,
+      status: "Pending"
     });
 
-    res.redirect("/");
-});
-
-app.post("/delete/:id", async (req, res) => {
-    await User.destroy({
-        where: {
-            id: req.params.id
-        }
-    });
+    console.log("Order placed for food:", req.params.id);
 
     res.redirect("/");
+  } catch (err) {
+    console.log("Order error:", err);
+    res.send("Order failed");
+  }
 });
 
-app.get("/edit/:id", async (req, res) => {
-    const user = await User.findByPk(req.params.id);
-
-    res.render("edit", { user });
-});
-
-app.post("/update/:id", async (req, res) => {
-    const { name, email } = req.body;
-
-    await User.update(
-        { name, email },
-        {
-            where: {
-                id: req.params.id
-            }
-        }
-    );
-
-    res.redirect("/");
-});
-
+/* START SERVER */
 app.listen(3000, () => {
-    console.log("Server running on port 3000");
+  console.log("Server running on port 3000");
 });

@@ -1,63 +1,61 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>CRUD App</title>
+  <title>Food Ordering System</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
 
-<h1>User Management</h1>
+<body class="bg-light">
 
-<form action="/add" method="POST">
+<div class="container mt-5">
 
-    <input 
-        type="text" 
-        name="name" 
-        placeholder="Enter Name" 
-        required
-    >
+  <h2 class="text-center mb-4">🍔 Food Ordering System</h2>
 
-    <input 
-        type="email" 
-        name="email" 
-        placeholder="Enter Email" 
-        required
-    >
+  <!-- ADD FOOD -->
+  <form action="/add-food" method="POST" class="mb-4 p-3 bg-white shadow rounded">
 
-    <button type="submit">Add User</button>
+    <input name="name" class="form-control mb-2" placeholder="Food Name" required>
 
-</form>
+    <input name="price" class="form-control mb-2" placeholder="Price" required>
 
-<hr>
+    <button class="btn btn-success w-100">Add Food</button>
 
-<% users.forEach(user => { %>
+  </form>
 
-<div>
+  <!-- FOOD LIST -->
+  <div class="bg-white p-3 shadow rounded">
 
-    <h3><%= user.name %></h3>
+    <table class="table table-bordered">
 
-    <p><%= user.email %></p>
+      <thead class="table-dark">
+        <tr>
+          <th>Food</th>
+          <th>Price</th>
+          <th>Action</th>
+        </tr>
+      </thead>
 
-    <a href="/edit/<%= user.id %>">
-        Edit
-    </a>
+      <tbody>
+        <% if (typeof foods !== "undefined") { %>
+          <% foods.forEach(food => { %>
+            <tr>
+              <td><%= food.name %></td>
+              <td>₹<%= food.price %></td>
+              <td>
+                <form action="/order/<%= food.id %>" method="POST">
+                  <button class="btn btn-primary btn-sm">Order</button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+        <% } %>
+      </tbody>
 
-    <form 
-        action="/delete/<%= user.id %>" 
-        method="POST"
-        style="display:inline;"
-    >
+    </table>
 
-        <button type="submit">
-            Delete
-        </button>
-
-    </form>
+  </div>
 
 </div>
-
-<hr>
-
-<% }) %>
 
 </body>
 </html>

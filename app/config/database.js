@@ -1,13 +1,8 @@
 const { Sequelize } = require("sequelize");
 
-const sequelize = new Sequelize(
-  "crudapp",
-  "cruduser",
-  "password123",
-  {
-    host: "localhost",
-    dialect: "mysql"
-  }
-);
+const sequelize = new Sequelize("fooddb", "appuser", "app123", {
+  host: "127.0.0.1",
+  dialect: "mysql",
+});
 
 module.exports = sequelize;
