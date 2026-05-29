@@ -55,7 +55,7 @@ app.get('/health', (req, res) => {
 });
 
 // ── Serve frontend for all other routes (SPA) ────────────
-app.get('*', (req, res) => {
+app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
@@ -74,3 +74,4 @@ app.listen(PORT, '0.0.0.0', () => {
 });
 
 module.exports = app;
+// test deploy
