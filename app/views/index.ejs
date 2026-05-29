@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CRUD App</title>
+</head>
+<body>
+
+<h1>User Management</h1>
+
+<form action="/add" method="POST">
+
+    <input 
+        type="text" 
+        name="name" 
+        placeholder="Enter Name" 
+        required
+    >
+
+    <input 
+        type="email" 
+        name="email" 
+        placeholder="Enter Email" 
+        required
+    >
+
+    <button type="submit">Add User</button>
+
+</form>
+
+<hr>
+
+<% users.forEach(user => { %>
+
+<div>
+
+    <h3><%= user.name %></h3>
+
+    <p><%= user.email %></p>
+
+    <a href="/edit/<%= user.id %>">
+        Edit
+    </a>
+
+    <form 
+        action="/delete/<%= user.id %>" 
+        method="POST"
+        style="display:inline;"
+    >
+
+        <button type="submit">
+            Delete
+        </button>
+
+    </form>
+
+</div>
+
+<hr>
+
+<% }) %>
+
+</body>
+</html>
