@@ -1,3 +1,5 @@
+<div align="center">
+
 # 🍔 FoodApp
 
 ### A Secure, Scalable Cloud-Based Food Ordering Platform
@@ -43,6 +45,10 @@
 - Update order status
 - Monitor active orders
 - Admin dashboard
+
+</td>
+</tr>
+</table>
 
 ---
 
@@ -270,6 +276,9 @@ GitHub Push → Jenkins Pipeline → Build → Test → Docker Build → Deploy 
 This project was developed for educational and academic purposes.
 
 ---
+VARGHESE C P
+<div align="center">
 
-VARGHESE C P 
 **Made with ❤️ · Cloud Computing & DevOps Project · 2026**
+
+</div>
